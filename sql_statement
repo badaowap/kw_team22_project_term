@@ -1,0 +1,85 @@
+create table Menu(
+	 id varchar(255) primary key,
+	 category varchar(255) not null,
+	 name varchar(255) not null,
+	 price int not null
+);
+
+insert into Menu(id, category, name, price) values('m1','drink','Afri',5900);
+insert into Menu(id, category, name, price) values('m2','drink','Bundaberg',3900);
+insert into Menu(id, category, name, price) values('m3','drink','CocaCola',2900);
+insert into Menu(id, category, name, price) values('m4','drink','Corn',2900);
+insert into Menu(id, category, name, price) values('m5','drink','Perrier',4900);
+insert into Menu(id, category, name, price) values('m6','drink','Sprite',2900);
+insert into Menu(id, category, name, price) values('m7','cafe','Cappuccino',8900);
+insert into Menu(id, category, name, price) values('m8','cafe','Homemade',6900);
+insert into Menu(id, category, name, price) values('m9','cafe','Latte',7900);
+insert into Menu(id, category, name, price) values('m10','cafe','Lobby',8900);
+insert into Menu(id, category, name, price) values('m11','cafe','Matcha',9900);
+insert into Menu(id, category, name, price) values('m12','cafe','Mocha',7900);
+insert into Menu(id, category, name, price) values('m13','food','Bagel',13900);
+insert into Menu(id, category, name, price) values('m14','food','Bowl',15900);
+insert into Menu(id, category, name, price) values('m15','food','Burrito',20900);
+insert into Menu(id, category, name, price) values('m16','food','Chesse',15900);
+insert into Menu(id, category, name, price) values('m17','food','Geneva',12900);
+insert into Menu(id, category, name, price) values('m18','food','Pizza',10900);
+insert into Menu(id, category, name, price) values('m20','wine','Brothers',25000);
+insert into Menu(id, category, name, price) values('m21','wine','Cuvee89',42000);
+insert into Menu(id, category, name, price) values('m22','wine','Lamarca',52000);
+insert into Menu(id, category, name, price) values('m23','wine','Makedonik',40000);
+insert into Menu(id, category, name, price) values('m24','wine','Ron',35000);
+insert into Menu(id, category, name, price) values('m25','wine','Unruly',42000);
+
+
+create table Customer(
+       	name varchar(255) not null,
+	phone varchar(255) primary key,
+	birthday date,
+	level int not null
+);
+
+insert into Customer(name, phone, birthday,level) values('nguyen nam', '01035348697', '1997/11/06', 2);
+insert into Customer(name, phone, birthday,level) values('john terry', '01022336677', '1995/06/02', 1);
+insert into Customer(name, phone, birthday,level) values('donal bobby', '01011447575', '1998/12/24', 0);
+insert into Customer(name, phone, birthday,level) values('no name', '00000000000', '1100/11/11', 0);
+
+create table Basket(
+	 menu_id varchar(255) not null,
+	 customer_phone varchar(255) not null,
+	 primary key(menu_id, customer_phone),
+	 foreign key(menu_id) references Menu(id),
+	 foreign key(customer_phone) references Customer(phone)
+); 
+
+insert into Basket(menu_id, customer_phone) values('m1', '01035348697');
+insert into Basket(menu_id, customer_phone) values('m4', '01035348697');
+insert into Basket(menu_id, customer_phone) values('m13', '01035348697');
+insert into Basket(menu_id, customer_phone) values('m5', '01035348697');
+insert into Basket(menu_id, customer_phone) values('m1', '01011447575');
+insert into Basket(menu_id, customer_phone) values('m4', '01022336677');
+insert into Basket(menu_id, customer_phone) values('m12', '01022336677');
+insert into Basket(menu_id, customer_phone) values('m5', '01011447575');
+
+create table Admin(
+	 user varchar(255),
+	 password varchar(255) not null,
+	 primary key(user)
+); 
+
+insert into Admin(user, password) values('kwteam22', '12345');
+
+create table Bill(
+       	id mediumint auto_increment primary key,
+	customer_phone varchar(255),
+	total int,
+	foreign key(customer_phone) references Customer(phone)
+);
+
+
+insert into Bill(customer_phone, total) values('01035348697', 20700);
+insert into Bill(customer_phone, total) values('01022336677', 50700);
+insert into Bill(customer_phone, total) values('01011447575', 70700);
+insert into Bill(customer_phone, total) values('00000000000', 10900);
+insert into Bill(customer_phone, total) values('00000000000', 26900);
+
+

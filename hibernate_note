@@ -1,0 +1,3 @@
+//to add or save a object em.persist, then et.commit
+//to edit a object em.merge, then at.commit
+//to remove a object em.remove, then at.commit
