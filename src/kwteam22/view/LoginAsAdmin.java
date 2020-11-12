@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -20,7 +21,7 @@ import kwteam22.model.Customer;
 import kwteam22.view.template.Conn;
 import kwteam22.view.template.ConnToDB;
 
-public class Login extends JDialog {
+public class LoginAsAdmin extends JDialog {
 
 	/**
 	 * 
@@ -32,24 +33,24 @@ public class Login extends JDialog {
 	JButton submit, btnBack;
 	MenuView menuView;
 	Query query;
-	List<Customer> customers;
-	Conn<Customer> connCus;
-	Customer loginCus;
+	List<Admin> admins;
+	Conn<Admin> connAdmin;
+	Admin loginAdmin;
 
-	public Login(JFrame jFrame, boolean modal, Customer loginCus, Admin loginAdmin) {
-		this.loginCus = loginCus;
+	public LoginAsAdmin(JFrame jFrame, boolean modal, Customer loginCus, Admin loginAdmin) {
+		this.loginAdmin = loginAdmin;
 		this.setLocationRelativeTo(null);
 		this.setTitle("Login");
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		menuView = (MenuView) jFrame;
 		addControl();
-		loadCustomerData();
+		loadAdminData();
 		addEvent();
 	}
 
-	private void loadCustomerData() {
-		connCus = new ConnToDB<Customer>();
-		customers = connCus.query(query, "from Customer");
+	private void loadAdminData() {
+		connAdmin = new ConnToDB<Admin>();
+		admins = connAdmin.query(query, "from Admin");
 	}
 
 	private void addEvent() {
@@ -67,34 +68,33 @@ public class Login extends JDialog {
 			}
 		});
 	}
-
+	
 	protected void btnEventBack(ActionEvent e) {
 		MenuView newView = new MenuView(false, null, null);
 		newView.setLocationRelativeTo(null);
 		newView.setVisible(true);
-		this.setVisible(false);
 		this.dispose();
 	}
 
 	protected void btnEventSubmit(ActionEvent e) {
 		String userName = userName_text.getText();
-		String phone = phone_text.getText();
 		boolean login = false;
 
-		for (Customer cus : customers) {
-			if (userName.trim().equalsIgnoreCase(cus.getName()) && phone.trim().equalsIgnoreCase(cus.getPhone())) {
+		String password = phone_text.getText();
+		for (Admin admin : admins) {
+			if (userName.trim().equalsIgnoreCase(admin.getUser()) && password.trim().equals(admin.getPassword())) {
 				message.setText(" Hi, " + userName + "");
 				login = true;
-				MenuView menuView = new MenuView(login, cus, null);
+				MenuView menuView = new MenuView(login, null, admin);
 				menuView.setVisible(true);
 				menuView.setLocationRelativeTo(null);
-				this.setVisible(false);
 				this.dispose();
 
 			} else {
 				message.setText(" Invalid user.. ");
 			}
 		}
+
 	}
 
 	private void addControl() {
@@ -106,38 +106,41 @@ public class Login extends JDialog {
 		message = new JLabel();
 
 		phone_label = new JLabel();
-		phone_label.setText("Phone Number :");
+		phone_label.setText("Password :");
 
 		user_label = new JLabel();
-		user_label.setText("Name :");
+		user_label.setText("User name :");
 		userName_text = new JTextField();
-		phone_text = new JTextField();
+		phone_text = new JPasswordField();
 		
 		btnBack = new JButton("BACK");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnBack.setBackground(Color.LIGHT_GRAY);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(22)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(22)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(phone_label, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(user_label, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(message, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(user_label, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-										.addComponent(phone_label, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE))
-									.addGap(2)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(userName_text)
-										.addComponent(phone_text, GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(91)
-							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(submit)))
-					.addContainerGap(12, Short.MAX_VALUE))
+								.addComponent(phone_text, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
+								.addComponent(userName_text, 203, 203, 203)))
+						.addComponent(message, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(14, Short.MAX_VALUE))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(73)
+					.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+					.addComponent(submit)
+					.addGap(60))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -150,17 +153,17 @@ public class Login extends JDialog {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(phone_label, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(phone_text, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(6)
 					.addComponent(message, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addGap(22)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-						.addComponent(submit, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+						.addComponent(submit, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+					.addGap(13))
 		);
 		getContentPane().setLayout(groupLayout);
 		setTitle("Please Login Here !");
-		setSize(391, 199);
+		setSize(371, 192);
 		setVisible(true);
 
 	}

@@ -31,6 +31,7 @@ public class Out extends JDialog {
 	 */
 	public Out(JFrame parent, boolean modal) {
 		this.setTitle("Exit system");
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		menuView = (MenuView) parent;
 		menuView.setVisible(false);
 		addControl();
@@ -73,7 +74,7 @@ public class Out extends JDialog {
 
 	protected void btnCancelEvent(ActionEvent e) {
 		menuView.dispose();
-		MenuView menu = new MenuView(false, MenuView.loginCus);
+		MenuView menu = new MenuView(false, MenuView.loginCus, null);
 		menu.setLocationRelativeTo(null);
 		menu.setVisible(true);
 		this.dispose();

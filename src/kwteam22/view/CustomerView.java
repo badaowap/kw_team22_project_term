@@ -59,6 +59,7 @@ public class CustomerView extends JDialog {
 		hashCus = new HashMap<Menu, Integer>();
 		hashCus.putAll(basket.mapBasket);
 		this.setTitle("Customer Information");
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		cusDataAccess();
 		addControl();
 		labelTotal.setText(basket.labelTotal.getText());
@@ -106,6 +107,9 @@ public class CustomerView extends JDialog {
 	}
 
 	protected void btnEventCancel(ActionEvent e) {
+		MenuView newMenuView = new MenuView(MenuView.loginAcc, MenuView.loginCus, MenuView.loginAdmin);
+		newMenuView.setLocationRelativeTo(null);
+		newMenuView.setVisible(true);
 		this.dispose();
 	}
 
@@ -148,7 +152,7 @@ public class CustomerView extends JDialog {
 		Bill bill = new Bill(customer, Integer.parseInt(labelTotal.getText()));
 		connBill.add(bill);
 		JOptionPane.showMessageDialog(rootPane, "계산되었다.");
-		MenuView menu = new MenuView(false, null);
+		MenuView menu = new MenuView(false, null, null);
 		menu.setLocationRelativeTo(null);
 		menu.setVisible(true);
 		menuView.dispose();

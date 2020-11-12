@@ -30,6 +30,7 @@ public class Cafe extends JDialog {
 	public Cafe(JFrame jFrame, boolean modal) {
 		this.setLocationRelativeTo(null);
 		this.setTitle("Cafe"); // name
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		bill = (MenuView) jFrame;
 		addControl();//design function
 		addEvent(); //event function

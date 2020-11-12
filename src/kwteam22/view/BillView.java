@@ -1,6 +1,5 @@
 package kwteam22.view;
 
-import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,49 +32,39 @@ public class BillView extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JPanel rootPane;
 	private JMenuBar menuBar;
-	private JButton btnExit, btnMenu;
-	private MenuView bill;
-	private Out out;
-	// private List<Bill> arrCus;
+	private JButton btnMenu;
+	// private MenuView menuView;
 	private JTextPane textPane;
 	private Query query;
-	private List<Bill> bills;
 	Conn<Customer> connCus;
 	List<Customer> customers;
 	Conn<Admin> connAdmin;
 	List<Admin> admins;
-	
+	List<Bill> bills;
+	Conn<Bill> connBill;
 
-	public BillView(JFrame parent, boolean modal) {
+	public BillView(JFrame parent, boolean modal, Customer loginCus, Admin loginAdmin) {
 		this.setTitle("영수증");
-		bill = (MenuView) parent;
-		loadCustomerData();
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		// menuView = (MenuView) parent;
 		addControl();
 		addEvent();
 	}
 
 	void showData(StringBuilder str, List<Bill> lists) {
-		for (Bill bill :  lists) {
-			str.append("bill id: " + bill.getId() + "\n" + "Phone Number: " + bill.getCustomer().getPhone() + "\n"
+		for (Bill bill : lists) {
+			str.append("Bill ID: " + bill.getId() + "\n" + "Phone Number: " + bill.getCustomer().getPhone() + "\n"
 					+ "Pay Total: " + bill.getTotal() + "\n-----------------------------------------" + "\n");
 		}
 	}
 
 	// file으로 부터 데이터 읽음
-	private void loadCustomerData() {
-		// boolean flag = false;
-		Conn<Bill> conn = new ConnToDB<Bill>();
-		bills = conn.query(query, "from Bill");
-	}
+	/*
+	 * private void loadCustomerData() { // boolean flag = false; Conn<Bill> conn =
+	 * new ConnToDB<Bill>(); bills = conn.query(query, "from Bill"); }
+	 */
 
 	private void addEvent() {
-		btnExit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				btnEventExit(e);
-			}
-		});
 		btnMenu.addActionListener(new ActionListener() {
 
 			@Override
@@ -86,20 +75,9 @@ public class BillView extends JDialog {
 	}
 
 	protected void btnEventMenu(ActionEvent e) {
-		bill = new MenuView(MenuView.loginAcc, MenuView.loginCus);
-		bill.setLocationRelativeTo(null);
-		bill.setVisible(true);
-		this.setVisible(false);
+		this.dispose();
 	}
 
-	protected void btnEventExit(ActionEvent e) {
-
-		out = new Out(this);
-		out.setLocationRelativeTo(null);
-		out.setVisible(true);
-	}
-
-	@SuppressWarnings("unlikely-arg-type")
 	private void addControl() {
 		setBounds(100, 100, 327, 226);
 
@@ -109,10 +87,6 @@ public class BillView extends JDialog {
 		btnMenu = new JButton("메뉴");
 		btnMenu.setBackground(SystemColor.scrollbar);
 		menuBar.add(btnMenu);
-
-		btnExit = new JButton("종류");
-		btnExit.setBackground(Color.ORANGE);
-		menuBar.add(btnExit);
 
 		rootPane = new JPanel();
 		rootPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -128,10 +102,12 @@ public class BillView extends JDialog {
 		customers = connCus.query(query, "from Customer");
 		connAdmin = new ConnToDB<Admin>();
 		admins = connAdmin.query(query, "from Admin");
-		
+
 		if (customers.contains(MenuView.loginCus)) {
 			showData(str, MenuView.loginCus.getBills());
-		}else if(admins.contains(MenuView.loginCus)) {
+		} else if (admins.contains(MenuView.loginAdmin)) {
+			connBill = new ConnToDB<Bill>();
+			bills = connBill.query(query, "from Bill");
 			showData(str, bills);
 		}
 		try {

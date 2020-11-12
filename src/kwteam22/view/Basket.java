@@ -38,6 +38,7 @@ public class Basket extends JDialog {
 		super(jFrame, modal);
 		menuView = (MenuView) jFrame;
 		this.setTitle("Basket Information");
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addControl();
 		mapBasket = new HashMap<Menu, Integer>();
 		mapBasket.putAll(menuView.mapTable); // menuView 테이블의 모든 데이터을 복사함
@@ -108,7 +109,6 @@ public class Basket extends JDialog {
 		customer.setLocationRelativeTo(null);
 		customer.setVisible(true);
 		this.setVisible(false);
-
 	}
 
 	protected void btnEventDelete() {

@@ -13,6 +13,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,6 +22,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import kwteam22.model.Admin;
 import kwteam22.model.Customer;
 import kwteam22.model.Menu;
 import kwteam22.view.template.Conn;
@@ -34,8 +36,8 @@ public class MenuView extends JFrame {
 	private DefaultTableModel tableModel;
 	Customer cus;
 	List<Menu> menus;
-	private JButton btnDrink, btnWine, btnCafe, btnFood, btnBuy, btnExit, 
-			btnInfor, btnLogin, btnSignUp, btnLogout, btnAdmin, btnMenu, btnReset;
+	private JButton btnDrink, btnWine, btnCafe, btnFood, btnBuy, btnExit, btnInfor, btnLogin, btnSignUp, btnLogout,
+			btnAdmin, btnReset;
 	private JTable table;
 	private JLabel lblTotal, lblMoney;
 	private Menu m;
@@ -43,21 +45,31 @@ public class MenuView extends JFrame {
 	private Basket basket;
 	private JMenuBar menuBar;
 	private Out out;
-	//private Admin admin;
+	// private Admin admin;
 	private BillView infor;
 	private Login login;
+	private LoginAsAdmin loginAsAdmin;
 	private SignUp signUp;
-	
+
 	public static boolean loginAcc;
 	public static Customer loginCus;
+	public static Admin loginAdmin;
+	private JMenu mnLogin;
+	private JButton btnLoginAsAdmin;
+	Food food;
+	Wine wine;
+	Cafe cafe;
+	Drink drink;
 
 	@SuppressWarnings("static-access")
-	public MenuView(boolean loginAcc, Customer cus) {
+	public MenuView(boolean loginAcc, Customer cus, Admin admin) {
 		this.loginAcc = loginAcc;
 		this.loginCus = cus;
+		this.loginAdmin = admin;
 		setBackground(SystemColor.inactiveCaption);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Wine Store"); // file name
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		loadMenuData(); // 메뉴 전부 다 읽어서 받음
 		mapTable = new HashMap<Menu, Integer>(); // 메뉴와 해당한 개수 저장
 		addControl(); // GUI 설계 함수
@@ -109,7 +121,7 @@ public class MenuView extends JFrame {
 
 	private void addEvent() {
 		btnReset.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				btnEventReset(e);
@@ -190,6 +202,13 @@ public class MenuView extends JFrame {
 			}
 		});
 
+		btnLoginAsAdmin.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnEventLoginAsAdmin(e);
+			}
+		});
+
 		btnSignUp.addActionListener(new ActionListener() {
 
 			@Override
@@ -207,7 +226,7 @@ public class MenuView extends JFrame {
 
 	protected void btnEventLogout(ActionEvent e) {
 		if (loginAcc == true) {
-			MenuView menuView = new MenuView(false, loginCus);
+			MenuView menuView = new MenuView(false, loginCus, null);
 			menuView.setVisible(true);
 			menuView.setLocationRelativeTo(null);
 			this.setVisible(false);
@@ -219,21 +238,29 @@ public class MenuView extends JFrame {
 		signUp = new SignUp(this, true);
 		signUp.setLocationRelativeTo(null);
 		signUp.setVisible(true);
+		this.setVisible(false);
 	}
 
 	protected void btnEventLogin(ActionEvent e) {
-		login = new Login(this, true);
+		login = new Login(this, true, loginCus, null);
 		login.setLocationRelativeTo(null);
 		login.setVisible(true);
 		this.setVisible(false);
 		this.dispose();
 	}
 
+	protected void btnEventLoginAsAdmin(ActionEvent e) {
+		loginAsAdmin = new LoginAsAdmin(this, true, null, loginAdmin);
+		loginAsAdmin.setLocationRelativeTo(null);
+		loginAsAdmin.setVisible(true);
+		this.setVisible(false);
+		this.dispose();
+	}
+
 	protected void btnEventInfo(ActionEvent e) {
-		infor = new BillView(this, true);
+		infor = new BillView(this, true, loginCus, loginAdmin);
 		infor.setLocationRelativeTo(null);
 		infor.setVisible(true);
-		this.setVisible(false);
 	}
 
 	protected void btnEventAdmin(ActionEvent e) {
@@ -260,38 +287,40 @@ public class MenuView extends JFrame {
 		basket = new Basket(this, true);
 		basket.setLocationRelativeTo(null);
 		basket.setVisible(true);
+		this.setVisible(false);
 	}
 
 	protected void btnEventFood(ActionEvent e) {
-		Food w = new Food(this, true);
-		w.setLocationRelativeTo(null);
-		w.setVisible(true);
+		food = new Food(this, true);
+		food.setLocationRelativeTo(null);
+		food.setVisible(true);
 		this.setVisible(false);
 	}
 
 	protected void btnEventWine(ActionEvent e) {
-		Wine w = new Wine(this, true);
-		w.setLocationRelativeTo(null);
-		w.setVisible(true);
+		wine = new Wine(this, true);
+		wine.setLocationRelativeTo(null);
+		wine.setVisible(true);
 		this.setVisible(false);
 	}
 
 	protected void btnEventCafe(ActionEvent e) {
-		Cafe w = new Cafe(this, true);
-		w.setLocationRelativeTo(null);
-		w.setVisible(true);
+		cafe = new Cafe(this, true);
+		cafe.setLocationRelativeTo(null);
+		cafe.setVisible(true);
 		this.setVisible(false);
 	}
 
 	protected void btnEventWater(ActionEvent e) {
-		Drink w = new Drink(this, true);
-		w.setLocationRelativeTo(null);
-		w.setVisible(true);
+		drink = new Drink(this, true);
+		drink.setLocationRelativeTo(null);
+		drink.setVisible(true);
 		this.setVisible(false);
 	}
 
+
 	private void addControl() {
-		setBounds(100, 100, 606, 559);
+		setBounds(100, 100, 822, 594);
 
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -299,38 +328,42 @@ public class MenuView extends JFrame {
 		btnAdmin = new JButton("관리자");
 		btnAdmin.setBackground(SystemColor.inactiveCaption);
 		menuBar.add(btnAdmin);
-
-		btnMenu = new JButton("메뉴");
-		btnMenu.setBackground(SystemColor.inactiveCaption);
-		menuBar.add(btnMenu);
+		btnAdmin.setVisible(false);
+		if (loginAdmin != null) {
+			btnAdmin.setVisible(true);
+		}
 
 		btnInfor = new JButton("영수증");
 		btnInfor.setBackground(SystemColor.inactiveCaption);
 		menuBar.add(btnInfor);
-
-		btnLogin = new JButton("로그인");
-		btnLogin.setForeground(Color.WHITE);
-		btnLogin.setBackground(Color.DARK_GRAY);
+		mnLogin = new JMenu("Login");
+		btnLogin = new JButton("Member");
+		btnLoginAsAdmin = new JButton("Admin    ");
 		if (loginAcc == true) {
-			if(loginCus.getLevel() == 2) {
-				btnLogin.setForeground(Color.RED);
-			}
-			btnLogin.setText( "Hi, "+loginCus.getName());
-			btnLogin.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-		
+			if (loginCus != null) {
+				if (loginCus.getLevel() == 2) {
+					mnLogin.setForeground(Color.RED);
 				}
-			});
+				mnLogin.setText("Hi, " + loginCus.getName());
+				btnLogin.setVisible(false);
+			} else if (loginAdmin != null) {
+				mnLogin.setForeground(Color.RED);
+				mnLogin.setText("Hi, " + loginAdmin.getUser());
+				btnLoginAsAdmin.setVisible(false);
+			}
 		}
-		menuBar.add(btnLogin);
-
-		btnSignUp = new JButton("회원가입");
+		btnSignUp = new JButton("SignUp");
 		btnSignUp.setBackground(Color.YELLOW);
 		if (loginAcc == true) {
 			btnSignUp.setVisible(false);
 		}
+		menuBar.add(mnLogin);
+		mnLogin.add(btnLogin);
+		btnLogin.setForeground(Color.BLACK);
+		btnLogin.setBackground(Color.LIGHT_GRAY);
+
+		btnLoginAsAdmin.setBackground(Color.LIGHT_GRAY);
+		mnLogin.add(btnLoginAsAdmin);
 		menuBar.add(btnSignUp);
 
 		btnLogout = new JButton("로그웃");
@@ -343,6 +376,10 @@ public class MenuView extends JFrame {
 		btnExit = new JButton("종류");
 		btnExit.setForeground(Color.BLACK);
 		btnExit.setBackground(Color.ORANGE);
+		btnExit.setVisible(false);
+		if (loginAdmin != null) {
+			btnExit.setVisible(true);
+		}
 		menuBar.add(btnExit);
 
 		rootPane = new JPanel();
@@ -351,15 +388,17 @@ public class MenuView extends JFrame {
 
 		JPanel panel = new JPanel();
 		GroupLayout gl_rootPane = new GroupLayout(rootPane);
-		gl_rootPane.setHorizontalGroup(gl_rootPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_rootPane
-						.createSequentialGroup().addComponent(panel, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(29, Short.MAX_VALUE)));
-		gl_rootPane.setVerticalGroup(gl_rootPane.createParallelGroup(Alignment.LEADING)
+		gl_rootPane.setHorizontalGroup(
+			gl_rootPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_rootPane.createSequentialGroup()
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 459, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(31, Short.MAX_VALUE)));
+					.addContainerGap(0, Short.MAX_VALUE)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		gl_rootPane.setVerticalGroup(
+			gl_rootPane.createParallelGroup(Alignment.TRAILING)
+				.addComponent(panel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 525, GroupLayout.PREFERRED_SIZE)
+		);
 
 		// gan anh vo button
 		btnCafe = new JButton("Cafe");
@@ -386,63 +425,70 @@ public class MenuView extends JFrame {
 		lblMoney = new JLabel("0");
 
 		btnBuy = new JButton("주문");
+		if(loginAdmin != null) {
+			btnBuy.setVisible(false);
+		}
 		btnBuy.setBackground(SystemColor.inactiveCaption);
-		
+
 		btnReset = new JButton("Reset");
 		btnReset.setBackground(Color.GREEN);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnFood, GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+						.addComponent(btnDrink, GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(btnWine, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnFood, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnDrink, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnCafe, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+							.addComponent(btnCafe, GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(btnWine, GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(42)
+							.addComponent(btnReset)
+							.addPreferredGap(ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnBuy, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(sp, GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(42)
-									.addComponent(btnReset)
-									.addPreferredGap(ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
 									.addComponent(lblTotal)
 									.addGap(18)
 									.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(313)
-							.addComponent(btnBuy, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(sp, GroupLayout.PREFERRED_SIZE, 478, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(5)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(sp, GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
-							.addGap(8)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblMoney)
-								.addComponent(lblTotal, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnReset)))
+							.addGap(11)
+							.addComponent(btnCafe, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnDrink, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnFood, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnWine, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(29))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnCafe, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnDrink, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnFood, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnWine, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnBuy, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+							.addComponent(sp, GroupLayout.PREFERRED_SIZE, 430, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTotal, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnReset))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnBuy, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		panel.setLayout(gl_panel);
 		rootPane.setLayout(gl_rootPane);
+		//add(rootPane,SwingConstants.CENTER);
 	}
 }

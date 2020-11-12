@@ -1,19 +1,12 @@
 package kwteam22.test;
 
-import java.util.List;
-
-import javax.persistence.Query;
-
-import kwteam22.model.Customer;
 import kwteam22.view.MenuView;
-import kwteam22.view.template.Conn;
-import kwteam22.view.template.ConnToDB;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		MenuView menuView = new MenuView(false, null);
+		MenuView menuView = new MenuView(false, null, null);
 		menuView.setLocationRelativeTo(null);
 		menuView.setVisible(true);
 

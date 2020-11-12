@@ -30,6 +30,7 @@ public class Drink extends JDialog{
 	public Drink(JFrame jFrame, boolean modal) {
 		this.setLocationRelativeTo(null);
 		this.setTitle("Drink"); 
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		bill = (MenuView)jFrame;
 		addControl(); //GUI 설계 함수
 		addEvent(); //이벤트 처리 함수

@@ -1,9 +1,16 @@
 package kwteam22.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the Customer database table.
@@ -33,6 +40,18 @@ public class Customer implements Serializable {
 	private List<Bill> bills;
 
 	public Customer() {
+	}
+	
+	public Customer(String phone, String name) {
+		this.name = name;
+		this.phone = phone;
+	}
+	
+	public Customer(String phone, String name, Date birthday) {
+		this.name = name;
+		this.phone = phone;
+		this.birthday = birthday;
+			
 	}
 
 	public String getPhone() {
@@ -100,7 +119,7 @@ public class Customer implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 		Customer cus = (Customer) obj;
-		if (cus.getPhone().equalsIgnoreCase(phone) && cus.getName().equalsIgnoreCase(name))
+		if (cus.getPhone().equalsIgnoreCase(phone))
 			return true;
 		return false;
 	}

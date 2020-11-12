@@ -36,5 +36,12 @@ public class Admin implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	@Override
+		public boolean equals(Object obj) {
+			Admin admin = (Admin)obj;
+			if(user.equals(admin.getUser()) && password.equals(admin.getPassword()))
+				return true;
+			return false;
+		}
 }
