@@ -27,6 +27,7 @@ import kwteam22.model.Customer;
 import kwteam22.model.Menu;
 import kwteam22.view.template.Conn;
 import kwteam22.view.template.ConnToDB;
+import java.awt.Font;
 
 public class MenuView extends JFrame {
 
@@ -45,8 +46,10 @@ public class MenuView extends JFrame {
 	private Basket basket;
 	private JMenuBar menuBar;
 	private Out out;
+	
 	// private Admin admin;
 	private BillView infor;
+	private AdminView admin;
 	private Login login;
 	private LoginAsAdmin loginAsAdmin;
 	private SignUp signUp;
@@ -263,13 +266,11 @@ public class MenuView extends JFrame {
 		infor.setVisible(true);
 	}
 
-	protected void btnEventAdmin(ActionEvent e) {
-
-		/*
-		 * admin = new Admin(this, true); admin.setLocationRelativeTo(null);
-		 * admin.setVisible(true); this.setVisible(false);
-		 */
-
+	protected void btnEventAdmin(ActionEvent e) {		
+		 admin = new AdminView(this, true); 
+		 admin.setLocationRelativeTo(null);
+		 admin.setVisible(true); 
+		 this.setVisible(false);
 	}
 
 	protected void btnEventExit(ActionEvent e) {
@@ -326,7 +327,8 @@ public class MenuView extends JFrame {
 		setJMenuBar(menuBar);
 
 		btnAdmin = new JButton("관리자");
-		btnAdmin.setBackground(SystemColor.inactiveCaption);
+		btnAdmin.setFont(new Font("Dialog", Font.BOLD, 14));
+		btnAdmin.setBackground(Color.LIGHT_GRAY);
 		menuBar.add(btnAdmin);
 		btnAdmin.setVisible(false);
 		if (loginAdmin != null) {
@@ -334,11 +336,15 @@ public class MenuView extends JFrame {
 		}
 
 		btnInfor = new JButton("영수증");
-		btnInfor.setBackground(SystemColor.inactiveCaption);
+		btnInfor.setFont(new Font("Dialog", Font.BOLD, 14));
+		btnInfor.setBackground(Color.LIGHT_GRAY);
 		menuBar.add(btnInfor);
 		mnLogin = new JMenu("Login");
+		mnLogin.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnLogin = new JButton("Member");
+		btnLogin.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnLoginAsAdmin = new JButton("Admin    ");
+		btnLoginAsAdmin.setFont(new Font("Dialog", Font.BOLD, 14));
 		if (loginAcc == true) {
 			if (loginCus != null) {
 				if (loginCus.getLevel() == 2) {
@@ -353,6 +359,7 @@ public class MenuView extends JFrame {
 			}
 		}
 		btnSignUp = new JButton("SignUp");
+		btnSignUp.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnSignUp.setBackground(Color.YELLOW);
 		if (loginAcc == true) {
 			btnSignUp.setVisible(false);
@@ -367,13 +374,15 @@ public class MenuView extends JFrame {
 		menuBar.add(btnSignUp);
 
 		btnLogout = new JButton("로그웃");
-		btnLogout.setBackground(Color.GRAY);
+		btnLogout.setFont(new Font("Dialog", Font.BOLD, 14));
+		btnLogout.setBackground(Color.LIGHT_GRAY);
 		if (loginAcc == false) {
 			btnLogout.setVisible(false);
 		}
 		menuBar.add(btnLogout);
 
 		btnExit = new JButton("종류");
+		btnExit.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnExit.setForeground(Color.BLACK);
 		btnExit.setBackground(Color.ORANGE);
 		btnExit.setVisible(false);
@@ -402,17 +411,21 @@ public class MenuView extends JFrame {
 
 		// gan anh vo button
 		btnCafe = new JButton("Cafe");
-		btnCafe.setBackground(SystemColor.inactiveCaption);
+		btnCafe.setFont(new Font("Dialog", Font.BOLD, 17));
+		btnCafe.setBackground(Color.PINK);
 
 		btnDrink = new JButton("Drink");
-		btnDrink.setBackground(SystemColor.inactiveCaption);
+		btnDrink.setFont(new Font("Dialog", Font.BOLD, 17));
+		btnDrink.setBackground(Color.CYAN);
 
 		btnFood = new JButton("Food");
+		btnFood.setFont(new Font("Dialog", Font.BOLD, 17));
 
-		btnFood.setBackground(SystemColor.inactiveCaption);
+		btnFood.setBackground(Color.GREEN);
 
 		btnWine = new JButton("Wine");
-		btnWine.setBackground(SystemColor.inactiveCaption);
+		btnWine.setFont(new Font("Dialog", Font.BOLD, 17));
+		btnWine.setBackground(Color.ORANGE);
 		table = new JTable();
 		String columnName[] = { "이름", "개수", "총금액" };
 		table.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {}, columnName));
@@ -425,12 +438,14 @@ public class MenuView extends JFrame {
 		lblMoney = new JLabel("0");
 
 		btnBuy = new JButton("주문");
+		btnBuy.setFont(new Font("Dialog", Font.BOLD, 14));
 		if(loginAdmin != null) {
 			btnBuy.setVisible(false);
 		}
-		btnBuy.setBackground(SystemColor.inactiveCaption);
+		btnBuy.setBackground(Color.LIGHT_GRAY);
 
 		btnReset = new JButton("Reset");
+		btnReset.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnReset.setBackground(Color.GREEN);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(

@@ -23,6 +23,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import kwteam22.model.Customer;
 import kwteam22.view.template.Conn;
 import kwteam22.view.template.ConnToDB;
+import java.awt.Font;
 
 public class SignUp extends JDialog {
 
@@ -114,23 +115,27 @@ public class SignUp extends JDialog {
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		// User Label
 		user_label = new JLabel();
+		user_label.setFont(new Font("Dialog", Font.BOLD, 14));
 		user_label.setText("Name :");
 		txtName = new JTextField();
 
 		// Password
 		phone_label = new JLabel();
+		phone_label.setFont(new Font("Dialog", Font.BOLD, 14));
 		phone_label.setText("Phone :");
 		txtPhone = new JTextField();
 
 		// phone number
 		birthday_label = new JLabel();
+		birthday_label.setFont(new Font("Dialog", Font.BOLD, 14));
 		birthday_label.setText("Birthday :");
 		txtBirthday = new JTextField();
 
 		// Submit
 
 		submit = new JButton("SUBMIT");
-		submit.setBackground(Color.GRAY);
+		submit.setFont(new Font("Dialog", Font.BOLD, 14));
+		submit.setBackground(Color.LIGHT_GRAY);
 
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -140,9 +145,11 @@ public class SignUp extends JDialog {
 		getContentPane().add(panel);
 
 		checkBoxFavorite = new JCheckBox("단골 등록");
+		checkBoxFavorite.setFont(new Font("Dialog", Font.BOLD, 15));
 		checkBoxFavorite.setBackground(Color.WHITE);
 
 		btnBack = new JButton("Back ");
+		btnBack.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnBack.setBackground(Color.LIGHT_GRAY);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel

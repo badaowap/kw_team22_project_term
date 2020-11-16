@@ -1,6 +1,7 @@
 package kwteam22.view;
 
-import java.awt.SystemColor;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,20 +19,26 @@ import javax.swing.border.EmptyBorder;
 
 import kwteam22.model.Menu;
 
-public class Wine extends JDialog{
+public class Wine extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel rootPane, selectPanel;
-	private JButton btnSelect, btnBack, btnBrothers, btnMakedonik, btnCuvee89, btnLamarca, btnRon, btnUnruly;
-	private JLabel lblSelect, labelCount, lblBrothers, lblCuvee89, lblLamarca, lblMakedonik, lblRon,lblUnruly;
-	private MenuView bill;
-	int count1=0, count2=0, count3=0, count4=0, count5=0, count6=0; //click chon thi tu dong tang len 1
+	private JButton btnSelect, btnBrothers, btnMakedonik, btnCuvee89, btnLamarca, btnRon, btnUnruly;
+	private JLabel lblSelect, labelCount, lblBrothers, lblCuvee89, lblLamarca, lblMakedonik, lblRon, lblUnruly;
+	private MenuView menuView;
+	int count1 = 0, count2 = 0, count3 = 0, count4 = 0, count5 = 0, count6 = 0; // click chon thi tu dong tang len 1
+	private JLabel lblBrothers_1;
+	private JLabel lblCuvee89_1;
+	private JLabel lblLamarca_1;
+	private JLabel lblMakedonik_1;
+	private JLabel lblRon_1;
+	private JLabel lblUnruly_1;
 
 	public Wine(JFrame jFrame, boolean modal) {
 		this.setLocationRelativeTo(null);
-		this.setTitle("Wine"); //ten
+		this.setTitle("Wine"); // ten
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		bill = (MenuView)jFrame;
+		menuView = (MenuView) jFrame;
 		addControl();
 		addEvent();
 	}
@@ -45,7 +52,11 @@ public class Wine extends JDialog{
 				String countMenu = String.valueOf(count1);
 				labelCount.setText(countMenu);
 				lblSelect.setText(lblBrothers.getText());
-				count2=0;count3=0;count4=0;count5=0;count6=0;
+				count2 = 0;
+				count3 = 0;
+				count4 = 0;
+				count5 = 0;
+				count6 = 0;
 			}
 		});
 
@@ -57,8 +68,12 @@ public class Wine extends JDialog{
 				String countMenu = String.valueOf(count2);
 				labelCount.setText(countMenu);
 				lblSelect.setText(lblCuvee89.getText());
-				count1=0;count3=0;count4=0;count5=0;count6=0;
-	
+				count1 = 0;
+				count3 = 0;
+				count4 = 0;
+				count5 = 0;
+				count6 = 0;
+
 			}
 		});
 
@@ -70,7 +85,11 @@ public class Wine extends JDialog{
 				String countMenu = String.valueOf(count3);
 				labelCount.setText(countMenu);
 				lblSelect.setText(lblLamarca.getText());
-				count2=0;count1=0;count4=0;count5=0;count6=0;
+				count2 = 0;
+				count1 = 0;
+				count4 = 0;
+				count5 = 0;
+				count6 = 0;
 			}
 		});
 
@@ -82,7 +101,11 @@ public class Wine extends JDialog{
 				String countMenu = String.valueOf(count4);
 				labelCount.setText(countMenu);
 				lblSelect.setText(lblRon.getText());
-				count2=0;count3=0;count1=0;count5=0;count6=0;
+				count2 = 0;
+				count3 = 0;
+				count1 = 0;
+				count5 = 0;
+				count6 = 0;
 			}
 		});
 
@@ -94,7 +117,11 @@ public class Wine extends JDialog{
 				String countMenu = String.valueOf(count5);
 				labelCount.setText(countMenu);
 				lblSelect.setText(lblMakedonik.getText());
-				count2=0;count3=0;count4=0;count1=0;count6=0;
+				count2 = 0;
+				count3 = 0;
+				count4 = 0;
+				count1 = 0;
+				count6 = 0;
 			}
 		});
 
@@ -106,17 +133,12 @@ public class Wine extends JDialog{
 				String countMenu = String.valueOf(count6);
 				labelCount.setText(countMenu);
 				lblSelect.setText(lblUnruly.getText());
-				count2=0;count3=0;count4=0;count5=0;count1=0;
+				count2 = 0;
+				count3 = 0;
+				count4 = 0;
+				count5 = 0;
+				count1 = 0;
 			}
-		});
-
-		btnBack.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				btnSkip(e);
-			}
-
 		});
 		btnSelect.addActionListener(new ActionListener() {
 
@@ -131,25 +153,25 @@ public class Wine extends JDialog{
 	protected void btnSelect(ActionEvent e) {
 		if (lblSelect.getText() == "Selected menu") {
 			JOptionPane.showMessageDialog(rootPane, "제품을 선택하지 않았음");
-		}else if(Integer.parseInt(labelCount.getText()) <= 0) {
+		} else if (Integer.parseInt(labelCount.getText()) <= 0) {
 			JOptionPane.showMessageDialog(rootPane, "수량을 선택하시요");
-		}
-			else {
-			bill.addMenu(lblSelect.getText(),Integer.parseInt(labelCount.getText()));
+		} else {
+			menuView.addMenu(lblSelect.getText(), Integer.parseInt(labelCount.getText()));
 			lblSelect.setText("Selected menu");
 			labelCount.setText("0");
+			MenuView newMenu = new MenuView(MenuView.loginAcc, MenuView.loginCus, MenuView.loginAdmin);
+			newMenu.setVisible(true);
+			newMenu.setLocationRelativeTo(null);
+			newMenu.mapTable = menuView.mapTable;
+			newMenu.showData();
+			this.dispose();
 		}
 
-	}
-
-	protected void btnSkip(ActionEvent e) {
-		this.dispose();
-		bill.setVisible(true);
 	}
 
 	public void addControl() {
 
-		setBounds(100, 100, 500, 594);
+		setBounds(100, 100, 533, 678);
 		rootPane = new JPanel();
 		rootPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(rootPane);
@@ -157,23 +179,24 @@ public class Wine extends JDialog{
 		selectPanel = new JPanel();
 
 		JLabel lblNewLabel = new JLabel("선택:");
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
 
 		JLabel label_1 = new JLabel("\uAC1C\uC218: ");
+		label_1.setFont(new Font("Dialog", Font.BOLD, 15));
 
 		btnSelect = new JButton("주문");
-		btnSelect.setBackground(SystemColor.inactiveCaption);
-
-		btnBack = new JButton("Back");
-		btnBack.setBackground(SystemColor.inactiveCaption);
+		btnSelect.setFont(new Font("Dialog", Font.BOLD, 15));
+		btnSelect.setBackground(Color.LIGHT_GRAY);
 
 		lblSelect = new JLabel("Selected menu");
-		
+		lblSelect.setFont(new Font("Dialog", Font.BOLD, 15));
+
 		labelCount = new JLabel("0");
-		
+
 		btnBrothers = new JButton(new ImageIcon("images/wine/Brothers.png"));
 
 		btnMakedonik = new JButton(new ImageIcon("images/wine/Cuvee 89.png"));
-		//ten va anh menu
+		// ten va anh menu
 		btnCuvee89 = new JButton(new ImageIcon("images/wine/Lamarca.png"));
 
 		btnLamarca = new JButton(new ImageIcon("images/wine/Makedonik.jpg"));
@@ -182,153 +205,202 @@ public class Wine extends JDialog{
 
 		btnUnruly = new JButton(new ImageIcon("images/wine/Unruly.png"));
 
-		 lblBrothers = new JLabel();
-		for(Menu m : bill.menus) {
-			if(m.getId().equalsIgnoreCase("m20")) {
+		lblBrothers = new JLabel();
+		lblCuvee89 = new JLabel();
+		lblLamarca = new JLabel();
+		lblMakedonik = new JLabel();
+		lblRon = new JLabel();
+		lblUnruly = new JLabel();
+
+		for (Menu m : menuView.menus) {
+			if (m.getId().equalsIgnoreCase("m20")) {
 				lblBrothers.setText(m.getName());
 			}
-		}
-
-		 lblCuvee89 = new JLabel();
-		for(Menu m : bill.menus) {
-			if(m.getId().equalsIgnoreCase("m21")) {
+			if (m.getId().equalsIgnoreCase("m21")) {
 				lblCuvee89.setText(m.getName());
 			}
-		}
-
-		 lblLamarca = new JLabel();
-		for(Menu m : bill.menus) {
-			if(m.getId().equalsIgnoreCase("m22")) {
+			if (m.getId().equalsIgnoreCase("m22")) {
 				lblLamarca.setText(m.getName());
 			}
-		}
-		 lblMakedonik = new JLabel();
-		for(Menu m : bill.menus) {
-			if(m.getId().equalsIgnoreCase("m23")) {
+			if (m.getId().equalsIgnoreCase("m23")) {
 				lblMakedonik.setText(m.getName());
 			}
-		}
-		 lblRon = new JLabel();
-		for(Menu m : bill.menus) {
-			if(m.getId().equalsIgnoreCase("m24")) {
+			if (m.getId().equalsIgnoreCase("m23")) {
+				lblMakedonik.setText(m.getName());
+			}
+			if (m.getId().equalsIgnoreCase("m24")) {
 				lblRon.setText(m.getName());
 			}
-		}
-		 lblUnruly = new JLabel();
-		for(Menu m : bill.menus) {
-			if(m.getId().equalsIgnoreCase("m25")) {
+			if (m.getId().equalsIgnoreCase("m25")) {
 				lblUnruly.setText(m.getName());
 			}
 		}
+
 		GroupLayout gl_rootPane = new GroupLayout(rootPane);
-		gl_rootPane.setHorizontalGroup(
-			gl_rootPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_rootPane.createSequentialGroup()
-					.addGroup(gl_rootPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_rootPane.createSequentialGroup()
-							.addGap(162)
-							.addGroup(gl_rootPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_rootPane.createSequentialGroup()
-									.addComponent(lblNewLabel)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(lblSelect, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_rootPane.createSequentialGroup()
-									.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(labelCount))
-								.addGroup(gl_rootPane.createSequentialGroup()
-									.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnSelect, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_rootPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(selectPanel, GroupLayout.PREFERRED_SIZE, 454, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_rootPane.setVerticalGroup(
-			gl_rootPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_rootPane.createSequentialGroup()
-					.addComponent(selectPanel, GroupLayout.PREFERRED_SIZE, 382, GroupLayout.PREFERRED_SIZE)
-					.addGap(36)
-					.addGroup(gl_rootPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel)
-						.addComponent(lblSelect))
-					.addGap(18)
-					.addGroup(gl_rootPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_1)
+		gl_rootPane.setHorizontalGroup(gl_rootPane.createParallelGroup(Alignment.LEADING).addGroup(gl_rootPane
+				.createSequentialGroup()
+				.addGroup(gl_rootPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_rootPane.createSequentialGroup().addGap(162)
+								.addGroup(gl_rootPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_rootPane.createSequentialGroup().addComponent(lblNewLabel)
+												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblSelect,
+														GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_rootPane.createSequentialGroup()
+												.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 44,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(labelCount))))
+						.addComponent(selectPanel, GroupLayout.PREFERRED_SIZE, 501, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_rootPane.createSequentialGroup().addGap(179).addComponent(btnSelect,
+								GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)))
+				.addContainerGap(22, Short.MAX_VALUE)));
+		gl_rootPane.setVerticalGroup(gl_rootPane.createParallelGroup(Alignment.LEADING).addGroup(gl_rootPane
+				.createSequentialGroup().addContainerGap()
+				.addComponent(selectPanel, GroupLayout.PREFERRED_SIZE, 478, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_rootPane
+						.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel).addComponent(lblSelect))
+				.addGap(18)
+				.addGroup(gl_rootPane.createParallelGroup(Alignment.BASELINE).addComponent(label_1)
 						.addComponent(labelCount))
-					.addGap(18)
-					.addGroup(gl_rootPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnSelect, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
-					.addGap(93))
-		);
-		
+				.addGap(18).addComponent(btnSelect, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+				.addGap(25)));
+
+		lblBrothers_1 = new JLabel();
+
+		lblCuvee89_1 = new JLabel();
+
+		lblLamarca_1 = new JLabel();
+
+		lblMakedonik_1 = new JLabel();
+
+		lblRon_1 = new JLabel();
+
+		lblUnruly_1 = new JLabel();
+
+		for (Menu m : menuView.menus) {
+			if (m.getId().equalsIgnoreCase("m20")) {
+				lblBrothers_1.setText(String.valueOf(m.getPrice()));
+			}
+			if (m.getId().equalsIgnoreCase("m21")) {
+				lblCuvee89_1.setText(String.valueOf(m.getPrice()));
+			}
+			if (m.getId().equalsIgnoreCase("m22")) {
+				lblLamarca_1.setText(String.valueOf(m.getPrice()));
+			}
+			if (m.getId().equalsIgnoreCase("m23")) {
+				lblMakedonik_1.setText(String.valueOf(m.getPrice()));
+			}
+			if (m.getId().equalsIgnoreCase("m24")) {
+				lblRon_1.setText(String.valueOf(m.getPrice()));
+			}
+			if (m.getId().equalsIgnoreCase("m25")) {
+				lblUnruly_1.setText(String.valueOf(m.getPrice()));
+			}
+		}
+
 		GroupLayout gl_selectPanel = new GroupLayout(selectPanel);
-		gl_selectPanel.setHorizontalGroup(
-			gl_selectPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_selectPanel.createSequentialGroup()
-					.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_selectPanel.createSequentialGroup()
-							.addGap(18)
-							.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnMakedonik, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+		gl_selectPanel.setHorizontalGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_selectPanel
+				.createSequentialGroup()
+				.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_selectPanel
+						.createSequentialGroup().addGap(34)
+						.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnBrothers, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_selectPanel.createSequentialGroup()
-									.addGap(12)
-									.addComponent(lblMakedonik, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))))
-						.addGroup(gl_selectPanel.createSequentialGroup()
-							.addGap(46)
-							.addComponent(lblBrothers, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-					.addGroup(gl_selectPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnRon, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnCuvee89, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_selectPanel.createSequentialGroup()
-							.addComponent(lblCuvee89)
-							.addGap(30))
-						.addGroup(gl_selectPanel.createSequentialGroup()
-							.addComponent(lblRon, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-							.addGap(19)))
-					.addPreferredGap(ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-					.addGroup(gl_selectPanel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_selectPanel.createSequentialGroup()
-							.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnUnruly, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnLamarca, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
-							.addContainerGap(25, Short.MAX_VALUE))
-						.addGroup(gl_selectPanel.createSequentialGroup()
-							.addComponent(lblLamarca)
-							.addGap(51))
-						.addGroup(gl_selectPanel.createSequentialGroup()
-							.addComponent(lblUnruly, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-							.addGap(36))))
-		);
-		gl_selectPanel.setVerticalGroup(
-			gl_selectPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_selectPanel.createSequentialGroup()
-					.addGap(18)
-					.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnMakedonik, GroupLayout.PREFERRED_SIZE, 115,
+												GroupLayout.PREFERRED_SIZE)
+										.addGroup(Alignment.TRAILING,
+												gl_selectPanel.createParallelGroup(Alignment.LEADING, false)
+														.addGroup(gl_selectPanel.createSequentialGroup().addGap(12)
+																.addComponent(lblMakedonik_1, GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+														.addComponent(lblMakedonik, Alignment.TRAILING,
+																GroupLayout.PREFERRED_SIZE, 95,
+																GroupLayout.PREFERRED_SIZE))))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_selectPanel.createSequentialGroup().addGap(85).addComponent(lblRon,
+										GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_selectPanel.createSequentialGroup().addGap(50)
+										.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
+												.addComponent(btnCuvee89, GroupLayout.PREFERRED_SIZE, 115,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btnRon, GroupLayout.PREFERRED_SIZE, 115,
+														GroupLayout.PREFERRED_SIZE)))
+								.addGroup(gl_selectPanel.createSequentialGroup().addGap(70).addComponent(lblRon_1,
+										GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(gl_selectPanel.createSequentialGroup().addGroup(gl_selectPanel
+								.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_selectPanel.createSequentialGroup().addGap(59).addComponent(lblBrothers,
+										GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_selectPanel.createSequentialGroup().addGap(79).addComponent(lblBrothers_1,
+										GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)))
+								.addGap(85)
+								.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_selectPanel.createSequentialGroup().addGap(12).addComponent(
+												lblCuvee89_1, GroupLayout.PREFERRED_SIZE, 64,
+												GroupLayout.PREFERRED_SIZE))
+										.addComponent(lblCuvee89, GroupLayout.PREFERRED_SIZE, 64,
+												GroupLayout.PREFERRED_SIZE))))
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_selectPanel.createSequentialGroup().addGap(46)
+								.addGroup(gl_selectPanel.createParallelGroup(Alignment.TRAILING)
+										.addComponent(btnUnruly, GroupLayout.PREFERRED_SIZE, 115,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnLamarca, GroupLayout.PREFERRED_SIZE, 115,
+												GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_selectPanel.createSequentialGroup().addGap(70)
+								.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblUnruly, GroupLayout.PREFERRED_SIZE, 65,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblUnruly_1, GroupLayout.PREFERRED_SIZE, 65,
+												GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_selectPanel.createSequentialGroup().addGap(76).addComponent(lblLamarca_1,
+								GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_selectPanel.createSequentialGroup().addGap(65).addComponent(lblLamarca,
+								GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
+				.addGap(324)));
+		gl_selectPanel.setVerticalGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_selectPanel
+				.createSequentialGroup().addContainerGap()
+				.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(btnBrothers, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnCuvee89, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnLamarca, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblLamarca, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblCuvee89, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblBrothers, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-					.addGap(26)
-					.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnUnruly, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.UNRELATED, 24, Short.MAX_VALUE)
+				.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_selectPanel.createSequentialGroup()
+								.addComponent(lblBrothers, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblBrothers_1,
+										GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_selectPanel.createSequentialGroup()
+								.addComponent(lblCuvee89, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(lblCuvee89_1, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_selectPanel.createSequentialGroup()
+								.addComponent(lblLamarca, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblLamarca_1,
+										GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
+				.addGap(52)
+				.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnMakedonik, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnRon, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnMakedonik, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblRon, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblMakedonik, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblUnruly, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(34, Short.MAX_VALUE))
-		);
+						.addComponent(btnUnruly, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+				.addGap(18)
+				.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_selectPanel
+						.createSequentialGroup()
+						.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblMakedonik, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblUnruly, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_selectPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblMakedonik_1, GroupLayout.PREFERRED_SIZE, 23,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblUnruly_1, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_selectPanel.createSequentialGroup()
+								.addComponent(lblRon, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(lblRon_1, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
+				.addGap(22)));
 		selectPanel.setLayout(gl_selectPanel);
 		rootPane.setLayout(gl_rootPane);
 	}

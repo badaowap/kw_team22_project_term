@@ -45,7 +45,6 @@ public class BillView extends JDialog {
 
 	public BillView(JFrame parent, boolean modal, Customer loginCus, Admin loginAdmin) {
 		this.setTitle("영수증");
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		// menuView = (MenuView) parent;
 		addControl();
 		addEvent();
@@ -79,7 +78,7 @@ public class BillView extends JDialog {
 	}
 
 	private void addControl() {
-		setBounds(100, 100, 327, 226);
+		setBounds(100, 100, 320, 507);
 
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

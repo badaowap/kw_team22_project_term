@@ -8,6 +8,8 @@
 		<class>kwteam22.model.Customer</class>
 		<class>kwteam22.model.Menu</class>
 		<class>kwteam22.model.Bill</class>
+		<class>kwteam22.model.Basket</class>
+		<class>kwteam22.model.BasketPK</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="org.mariadb.jdbc.Driver" />

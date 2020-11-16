@@ -26,8 +26,7 @@ public class Login extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel user_label, phone_label, message;
-	JTextField userName_text;
+	JLabel phone_label, message;
 	JTextField phone_text;
 	JButton submit, btnBack;
 	MenuView menuView;
@@ -77,13 +76,12 @@ public class Login extends JDialog {
 	}
 
 	protected void btnEventSubmit(ActionEvent e) {
-		String userName = userName_text.getText();
 		String phone = phone_text.getText();
 		boolean login = false;
 
 		for (Customer cus : customers) {
-			if (userName.trim().equalsIgnoreCase(cus.getName()) && phone.trim().equalsIgnoreCase(cus.getPhone())) {
-				message.setText(" Hi, " + userName + "");
+			if (phone.trim().equalsIgnoreCase(cus.getPhone())) {
+				message.setText(" Hi, " + phone + "");
 				login = true;
 				MenuView menuView = new MenuView(login, cus, null);
 				menuView.setVisible(true);
@@ -107,10 +105,6 @@ public class Login extends JDialog {
 
 		phone_label = new JLabel();
 		phone_label.setText("Phone Number :");
-
-		user_label = new JLabel();
-		user_label.setText("Name :");
-		userName_text = new JTextField();
 		phone_text = new JTextField();
 		
 		btnBack = new JButton("BACK");
@@ -125,13 +119,9 @@ public class Login extends JDialog {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(message, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(user_label, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-										.addComponent(phone_label, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE))
+									.addComponent(phone_label, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
 									.addGap(2)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(userName_text)
-										.addComponent(phone_text, GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))))
+									.addComponent(phone_text, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(91)
 							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
@@ -142,11 +132,7 @@ public class Login extends JDialog {
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(user_label, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(userName_text, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addGap(9)
+					.addGap(46)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(phone_label, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(phone_text, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
@@ -160,7 +146,7 @@ public class Login extends JDialog {
 		);
 		getContentPane().setLayout(groupLayout);
 		setTitle("Please Login Here !");
-		setSize(391, 199);
+		setSize(420, 205);
 		setVisible(true);
 
 	}

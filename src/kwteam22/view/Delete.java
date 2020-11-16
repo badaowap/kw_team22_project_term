@@ -1,12 +1,12 @@
 package kwteam22.view;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -127,59 +127,52 @@ public class Delete extends JDialog {
 	public void addControl() {
 		setBounds(100, 100, 448, 370);
 		String columnName[] = { "Name", "Quantity", "Price" };
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{205, 101, 118, 0};
-		gridBagLayout.rowHeights = new int[]{29, 247, 31, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		getContentPane().setLayout(gridBagLayout);
 		
 				textSearch = new JTextField();
 				textSearch.setColumns(10);
-				GridBagConstraints gbc_textSearch = new GridBagConstraints();
-				gbc_textSearch.fill = GridBagConstraints.HORIZONTAL;
-				gbc_textSearch.insets = new Insets(0, 0, 5, 5);
-				gbc_textSearch.gridwidth = 2;
-				gbc_textSearch.gridx = 0;
-				gbc_textSearch.gridy = 0;
-				getContentPane().add(textSearch, gbc_textSearch);
 				
 						btnSearch = new JButton("Search");
-						GridBagConstraints gbc_btnSearch = new GridBagConstraints();
-						gbc_btnSearch.anchor = GridBagConstraints.NORTH;
-						gbc_btnSearch.insets = new Insets(0, 0, 5, 0);
-						gbc_btnSearch.gridx = 2;
-						gbc_btnSearch.gridy = 0;
-						getContentPane().add(btnSearch, gbc_btnSearch);
+						btnSearch.setBackground(Color.LIGHT_GRAY);
 				table = new JTable();
 				table.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {}, columnName));
 				tableModel = (DefaultTableModel) table.getModel();
 				JScrollPane scrollPane = new JScrollPane();
 				scrollPane.setViewportView(table);
-				GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-				gbc_scrollPane.fill = GridBagConstraints.BOTH;
-				gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
-				gbc_scrollPane.gridwidth = 3;
-				gbc_scrollPane.gridx = 0;
-				gbc_scrollPane.gridy = 1;
-				getContentPane().add(scrollPane, gbc_scrollPane);
 				
 				btnBack = new JButton("Back");
-				GridBagConstraints gbc_btnBack = new GridBagConstraints();
-				gbc_btnBack.anchor = GridBagConstraints.EAST;
-				gbc_btnBack.fill = GridBagConstraints.VERTICAL;
-				gbc_btnBack.insets = new Insets(0, 0, 0, 5);
-				gbc_btnBack.gridx = 0;
-				gbc_btnBack.gridy = 2;
-				getContentPane().add(btnBack, gbc_btnBack);
+				btnBack.setBackground(Color.LIGHT_GRAY);
 		
 				btnDelete = new JButton("Delete");
-				GridBagConstraints gbc_btnDelete = new GridBagConstraints();
-				gbc_btnDelete.anchor = GridBagConstraints.WEST;
-				gbc_btnDelete.fill = GridBagConstraints.VERTICAL;
-				gbc_btnDelete.insets = new Insets(0, 0, 0, 5);
-				gbc_btnDelete.gridx = 1;
-				gbc_btnDelete.gridy = 2;
-				getContentPane().add(btnDelete, gbc_btnDelete);
+				btnDelete.setBackground(Color.LIGHT_GRAY);
+				GroupLayout groupLayout = new GroupLayout(getContentPane());
+				groupLayout.setHorizontalGroup(
+					groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(textSearch, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
+							.addGap(22)
+							.addComponent(btnSearch))
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 424, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(133)
+							.addComponent(btnBack)
+							.addGap(5)
+							.addComponent(btnDelete))
+				);
+				groupLayout.setVerticalGroup(
+					groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(3)
+									.addComponent(textSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(btnSearch))
+							.addGap(5)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)
+							.addGap(5)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnDelete, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+				);
+				getContentPane().setLayout(groupLayout);
 	}
 }

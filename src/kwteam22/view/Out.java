@@ -1,12 +1,13 @@
 package kwteam22.view;
 
 import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -89,48 +90,55 @@ public class Out extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{79, 79, 53, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 20, 29, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		contentPanel.setLayout(gbl_contentPanel);
 				{
 					lblNewLabel_1 = new JLabel(" ");
-					GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-					gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-					gbc_lblNewLabel_1.gridx = 1;
-					gbc_lblNewLabel_1.gridy = 0;
-					contentPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 				}
 		
 				JLabel lblNewLabel = new JLabel("종류하시겠습니까?");
-				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-				gbc_lblNewLabel.anchor = GridBagConstraints.NORTH;
-				gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
-				gbc_lblNewLabel.gridwidth = 2;
-				gbc_lblNewLabel.gridx = 1;
-				gbc_lblNewLabel.gridy = 1;
-				contentPanel.add(lblNewLabel, gbc_lblNewLabel);
+				lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 17));
 		{
 			cancelButton = new JButton("Cancel");
+			cancelButton.setFont(new Font("Dialog", Font.BOLD, 14));
+			cancelButton.setBackground(Color.LIGHT_GRAY);
 			cancelButton.setActionCommand("Cancel");
 		}
-		GridBagConstraints gbc_cancelButton = new GridBagConstraints();
-		gbc_cancelButton.anchor = GridBagConstraints.NORTHWEST;
-		gbc_cancelButton.insets = new Insets(0, 0, 0, 5);
-		gbc_cancelButton.gridx = 1;
-		gbc_cancelButton.gridy = 2;
-		contentPanel.add(cancelButton, gbc_cancelButton);
 		{
 			okButton = new JButton("OK");
+			okButton.setFont(new Font("Dialog", Font.BOLD, 14));
+			okButton.setBackground(Color.LIGHT_GRAY);
 			okButton.setActionCommand("OK");
 			getRootPane().setDefaultButton(okButton);
 		}
-		GridBagConstraints gbc_okButton = new GridBagConstraints();
-		gbc_okButton.anchor = GridBagConstraints.NORTHWEST;
-		gbc_okButton.gridx = 2;
-		gbc_okButton.gridy = 2;
-		contentPanel.add(okButton, gbc_okButton);
+		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
+		gl_contentPanel.setHorizontalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(117)
+							.addComponent(lblNewLabel_1))
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(79)
+							.addComponent(cancelButton)
+							.addGap(5)
+							.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(65, Short.MAX_VALUE))
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addContainerGap(99, Short.MAX_VALUE)
+					.addComponent(lblNewLabel)
+					.addGap(73))
+		);
+		gl_contentPanel.setVerticalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addComponent(lblNewLabel_1)
+					.addGap(5)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(okButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(cancelButton, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)))
+		);
+		contentPanel.setLayout(gl_contentPanel);
 	}
 }
