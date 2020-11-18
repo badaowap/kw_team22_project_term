@@ -37,7 +37,6 @@ public class Cafe extends JDialog {
 	public Cafe(JFrame jFrame, boolean modal) {
 		this.setLocationRelativeTo(null);
 		this.setTitle("Cafe"); // name
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		bill = (MenuView) jFrame;
 		addControl();// design function
 		addEvent(); // event function
@@ -160,11 +159,8 @@ public class Cafe extends JDialog {
 			bill.addMenu(lblSelect.getText(), Integer.parseInt(labelCount.getText()));
 			lblSelect.setText("Selected menu");
 			labelCount.setText("0");
-			MenuView newMenu = new MenuView(MenuView.loginAcc, MenuView.loginCus, MenuView.loginAdmin);
-			newMenu.setVisible(true);
-			newMenu.setLocationRelativeTo(null);
-			newMenu.mapTable = bill.mapTable;
-			newMenu.showData();
+			bill.mapTable = bill.mapTable;
+			bill.showData();
 			this.dispose();
 		}
 
@@ -226,35 +222,48 @@ public class Cafe extends JDialog {
 		}
 
 		GroupLayout gl_rootPane = new GroupLayout(rootPane);
-		gl_rootPane.setHorizontalGroup(gl_rootPane.createParallelGroup(Alignment.LEADING).addGroup(gl_rootPane
-				.createSequentialGroup()
-				.addGroup(gl_rootPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_rootPane.createSequentialGroup().addGap(162)
-								.addGroup(gl_rootPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_rootPane.createSequentialGroup().addGap(5)
-												.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 42,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblSelect,
-														GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_rootPane.createSequentialGroup().addGap(9)
-												.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 44,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(labelCount))))
-						.addGroup(gl_rootPane.createSequentialGroup().addGap(186).addComponent(btnSelect,
-								GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_rootPane.createSequentialGroup().addContainerGap().addComponent(btn2,
-								GroupLayout.PREFERRED_SIZE, 484, GroupLayout.PREFERRED_SIZE)))
-				.addContainerGap(20, Short.MAX_VALUE)));
-		gl_rootPane.setVerticalGroup(gl_rootPane.createParallelGroup(Alignment.LEADING).addGroup(gl_rootPane
-				.createSequentialGroup().addGap(38)
-				.addComponent(btn2, GroupLayout.PREFERRED_SIZE, 441, GroupLayout.PREFERRED_SIZE).addGap(38)
-				.addGroup(gl_rootPane
-						.createParallelGroup(Alignment.BASELINE).addComponent(lblSelect).addComponent(lblNewLabel))
-				.addGap(18)
-				.addGroup(gl_rootPane.createParallelGroup(Alignment.BASELINE).addComponent(label_1)
+		gl_rootPane.setHorizontalGroup(
+			gl_rootPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_rootPane.createSequentialGroup()
+					.addGroup(gl_rootPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_rootPane.createSequentialGroup()
+							.addGap(162)
+							.addGroup(gl_rootPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_rootPane.createSequentialGroup()
+									.addGap(5)
+									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblSelect, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_rootPane.createSequentialGroup()
+									.addGap(9)
+									.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(labelCount))))
+						.addGroup(gl_rootPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btn2, GroupLayout.PREFERRED_SIZE, 484, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_rootPane.createSequentialGroup()
+							.addGap(186)
+							.addComponent(btnSelect, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(20, Short.MAX_VALUE))
+		);
+		gl_rootPane.setVerticalGroup(
+			gl_rootPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_rootPane.createSequentialGroup()
+					.addGap(38)
+					.addComponent(btn2, GroupLayout.PREFERRED_SIZE, 441, GroupLayout.PREFERRED_SIZE)
+					.addGap(38)
+					.addGroup(gl_rootPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblSelect)
+						.addComponent(lblNewLabel))
+					.addGap(18)
+					.addGroup(gl_rootPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_1)
 						.addComponent(labelCount))
-				.addGap(18).addComponent(btnSelect, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-				.addGap(24)));
+					.addGap(18)
+					.addComponent(btnSelect, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+					.addContainerGap())
+		);
 
 		lblCam_1 = new JLabel();
 		lblLobby_1 = new JLabel();

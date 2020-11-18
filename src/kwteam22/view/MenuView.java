@@ -70,7 +70,6 @@ public class MenuView extends JFrame {
 		this.loginCus = cus;
 		this.loginAdmin = admin;
 		setBackground(SystemColor.inactiveCaption);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Wine Store"); // file name
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		loadMenuData(); // 메뉴 전부 다 읽어서 받음
@@ -295,28 +294,24 @@ public class MenuView extends JFrame {
 		food = new Food(this, true);
 		food.setLocationRelativeTo(null);
 		food.setVisible(true);
-		this.setVisible(false);
 	}
 
 	protected void btnEventWine(ActionEvent e) {
 		wine = new Wine(this, true);
 		wine.setLocationRelativeTo(null);
 		wine.setVisible(true);
-		this.setVisible(false);
 	}
 
 	protected void btnEventCafe(ActionEvent e) {
 		cafe = new Cafe(this, true);
 		cafe.setLocationRelativeTo(null);
 		cafe.setVisible(true);
-		this.setVisible(false);
 	}
 
 	protected void btnEventWater(ActionEvent e) {
 		drink = new Drink(this, true);
 		drink.setLocationRelativeTo(null);
 		drink.setVisible(true);
-		this.setVisible(false);
 	}
 
 

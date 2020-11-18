@@ -9,27 +9,5 @@ public class Main {
 		MenuView menuView = new MenuView(false, null, null);
 		menuView.setLocationRelativeTo(null);
 		menuView.setVisible(true);
-
-		/*
-		 * String name = "ashino itachi"; String phone = "01022334455"; Customer cus =
-		 * new Customer(); cus.setPhone(phone); cus.setName(name);
-		 * 
-		 * Conn<Customer> conn = new ConnToDB<Customer>(); Query query = null;
-		 * List<Customer> lists = conn.query(query, "from Customer");
-		 * if(lists.contains(cus)) System.out.println("My name is Nam");
-		 */
-		/*
-		 * EntityManagerFactory emf = null; EntityManager em = null; EntityTransaction
-		 * et = null; try { emf =
-		 * Persistence.createEntityManagerFactory("VendingMachine"); em =
-		 * emf.createEntityManager(); et = em.getTransaction(); et.begin();
-		 * 
-		 * Customer cus = new Customer(); cus = em.find(Customer.class, "00000000000");
-		 * String str = null; Date date = new SimpleDateFormat("yyyy/MM/dd").parse(str);
-		 * cus.setBirthday(date); em.merge(cus); et.commit();
-		 * 
-		 * } catch (Exception e) { e.printStackTrace(); }
-		 */
-
 	}
 }

@@ -25,7 +25,7 @@ public class Wine extends JDialog {
 	private JPanel rootPane, selectPanel;
 	private JButton btnSelect, btnBrothers, btnMakedonik, btnCuvee89, btnLamarca, btnRon, btnUnruly;
 	private JLabel lblSelect, labelCount, lblBrothers, lblCuvee89, lblLamarca, lblMakedonik, lblRon, lblUnruly;
-	private MenuView menuView;
+	private MenuView bill;
 	int count1 = 0, count2 = 0, count3 = 0, count4 = 0, count5 = 0, count6 = 0; // click chon thi tu dong tang len 1
 	private JLabel lblBrothers_1;
 	private JLabel lblCuvee89_1;
@@ -37,8 +37,7 @@ public class Wine extends JDialog {
 	public Wine(JFrame jFrame, boolean modal) {
 		this.setLocationRelativeTo(null);
 		this.setTitle("Wine"); // ten
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		menuView = (MenuView) jFrame;
+		bill = (MenuView) jFrame;
 		addControl();
 		addEvent();
 	}
@@ -156,14 +155,11 @@ public class Wine extends JDialog {
 		} else if (Integer.parseInt(labelCount.getText()) <= 0) {
 			JOptionPane.showMessageDialog(rootPane, "수량을 선택하시요");
 		} else {
-			menuView.addMenu(lblSelect.getText(), Integer.parseInt(labelCount.getText()));
+			bill.addMenu(lblSelect.getText(), Integer.parseInt(labelCount.getText()));
 			lblSelect.setText("Selected menu");
 			labelCount.setText("0");
-			MenuView newMenu = new MenuView(MenuView.loginAcc, MenuView.loginCus, MenuView.loginAdmin);
-			newMenu.setVisible(true);
-			newMenu.setLocationRelativeTo(null);
-			newMenu.mapTable = menuView.mapTable;
-			newMenu.showData();
+			bill.mapTable = bill.mapTable;
+			bill.showData();
 			this.dispose();
 		}
 
@@ -212,7 +208,7 @@ public class Wine extends JDialog {
 		lblRon = new JLabel();
 		lblUnruly = new JLabel();
 
-		for (Menu m : menuView.menus) {
+		for (Menu m : bill.menus) {
 			if (m.getId().equalsIgnoreCase("m20")) {
 				lblBrothers.setText(m.getName());
 			}
@@ -277,7 +273,7 @@ public class Wine extends JDialog {
 
 		lblUnruly_1 = new JLabel();
 
-		for (Menu m : menuView.menus) {
+		for (Menu m : bill.menus) {
 			if (m.getId().equalsIgnoreCase("m20")) {
 				lblBrothers_1.setText(String.valueOf(m.getPrice()));
 			}

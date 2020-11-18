@@ -36,7 +36,6 @@ public class Food extends JDialog {
 
 	public Food(JFrame jFrame, boolean modal) {
 		this.setTitle("Food");
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		bill = (MenuView) jFrame;
 		addControl();
 		addEvent();
@@ -157,11 +156,8 @@ public class Food extends JDialog {
 			bill.addMenu(lblSelect.getText(), Integer.parseInt(labelCount.getText()));
 			lblSelect.setText("Selected menu");
 			labelCount.setText("0");
-			MenuView newMenu = new MenuView(MenuView.loginAcc, MenuView.loginCus, MenuView.loginAdmin);
-			newMenu.setVisible(true);
-			newMenu.setLocationRelativeTo(null);
-			newMenu.mapTable = bill.mapTable;
-			newMenu.showData();
+			bill.mapTable = bill.mapTable;
+			bill.showData();
 			this.dispose();
 		}
 

@@ -37,7 +37,6 @@ public class Drink extends JDialog {
 	public Drink(JFrame jFrame, boolean modal) {
 		this.setLocationRelativeTo(null);
 		this.setTitle("Drink");
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		bill = (MenuView) jFrame;
 		addControl(); // GUI 설계 함수
 		addEvent(); // 이벤트 처리 함수
@@ -159,11 +158,8 @@ public class Drink extends JDialog {
 			bill.addMenu(lblSelect.getText(), Integer.parseInt(labelCount.getText()));
 			lblSelect.setText("Selected menu");
 			labelCount.setText("0");
-			MenuView newMenu = new MenuView(MenuView.loginAcc, MenuView.loginCus, MenuView.loginAdmin);
-			newMenu.setVisible(true);
-			newMenu.setLocationRelativeTo(null);
-			newMenu.mapTable = bill.mapTable;
-			newMenu.showData();
+			bill.mapTable = bill.mapTable;
+			bill.showData();
 			this.dispose();
 		}
 

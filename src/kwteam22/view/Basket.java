@@ -123,7 +123,7 @@ public class Basket extends JDialog {
 	}
 
 	public void addControl() {
-		setBounds(100, 100, 346, 399);
+		setBounds(100, 100, 339, 399);
 		String columnName[] = { "이름", "개수", "총금액" };
 		table = new JTable();
 		table.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {}, columnName));
@@ -140,11 +140,11 @@ public class Basket extends JDialog {
 		lblXacNhan = new JLabel("0");
 		lblXacNhan.setFont(new Font("Dialog", Font.BOLD, 15));
 
-		btnInsert = new JButton("추가");
+		btnInsert = new JButton("   +   ");
 		btnInsert.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnInsert.setBackground(Color.LIGHT_GRAY);
 
-		btnDelete = new JButton("삭제");
+		btnDelete = new JButton("   -   ");
 		btnDelete.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnDelete.setBackground(Color.LIGHT_GRAY);
 
@@ -152,46 +152,53 @@ public class Basket extends JDialog {
 		btnPay.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnPay.setBackground(Color.RED);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup()
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 327, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addComponent(btnInsert, GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup().addGap(86).addComponent(lblCoupon)
-												.addGap(5).addComponent(lblXacNhan))
-										.addGroup(groupLayout.createSequentialGroup().addGap(93).addGroup(groupLayout
-												.createParallelGroup(Alignment.TRAILING)
-												.addGroup(groupLayout.createSequentialGroup()
-														.addComponent(btnPay, GroupLayout.PREFERRED_SIZE, 100,
-																GroupLayout.PREFERRED_SIZE)
-														.addGap(30))
-												.addGroup(groupLayout.createSequentialGroup().addComponent(label)
-														.addPreferredGap(ComponentPlacement.UNRELATED)
-														.addComponent(labelTotal, GroupLayout.PREFERRED_SIZE, 105,
-																GroupLayout.PREFERRED_SIZE)))))))
-				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup()
-				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-						.createSequentialGroup().addGap(5)
-						.addGroup(groupLayout
-								.createParallelGroup(Alignment.BASELINE).addComponent(labelTotal).addComponent(label))
-						.addGap(5)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lblCoupon)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+								.addComponent(btnInsert))
+							.addGap(86)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(label, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(labelTotal, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
+								.addComponent(btnPay, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblCoupon)
+									.addGap(5)
+									.addComponent(lblXacNhan)))
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(5)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(labelTotal, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label))
+							.addGap(5)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblCoupon)
 								.addComponent(lblXacNhan))
-						.addGap(18).addComponent(btnPay, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup().addGap(18)
-								.addComponent(btnInsert, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(btnDelete, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)))
-				.addGap(14)));
+							.addGap(18)
+							.addComponent(btnPay, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(18)
+							.addComponent(btnInsert, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addGap(22))
+		);
 		getContentPane().setLayout(groupLayout);
 	}
 }
