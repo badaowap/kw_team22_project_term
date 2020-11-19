@@ -40,6 +40,7 @@ public class SignUp extends JDialog {
 	Query query;
 	Conn<Customer> conn;
 	List<Customer> customers;
+	private JLabel label;
 
 	public SignUp(JFrame jFrame, boolean modal) {
 		this.setLocationRelativeTo(null);
@@ -82,7 +83,7 @@ public class SignUp extends JDialog {
 		String birthday = txtBirthday.getText().trim();
 		Date date;
 		try {
-			date = new SimpleDateFormat("yyyy/MM/dd").parse(birthday);
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
 		} catch (Exception e1) {
 			date = null;
 			e1.printStackTrace();
@@ -151,52 +152,65 @@ public class SignUp extends JDialog {
 		btnBack = new JButton("Back ");
 		btnBack.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnBack.setBackground(Color.LIGHT_GRAY);
+		
+		label = new JLabel("(1996-11-11)");
+		label.setFont(new Font("Dialog", Font.BOLD, 14));
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(phone_label, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
 								.addComponent(user_label, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-								.addComponent(birthday_label, GroupLayout.PREFERRED_SIZE, 91,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(24)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(birthday_label, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+							.addGap(24)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(txtBirthday, 207, 207, Short.MAX_VALUE)
-								.addComponent(txtPhone, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-								.addComponent(txtName, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+								.addComponent(txtPhone, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+								.addComponent(txtName, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
 								.addComponent(checkBoxFavorite)
-								.addComponent(message, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
-						.addGap(53))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup().addGap(57)
-								.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-								.addComponent(submit, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
-								.addGap(42)))));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap()
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(user_label, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(phone_label, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addComponent(txtPhone, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
-						.addGap(18).addComponent(checkBoxFavorite).addGap(11)
-						.addGroup(
-								gl_panel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(txtBirthday, GroupLayout.PREFERRED_SIZE, 27,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(birthday_label, GroupLayout.PREFERRED_SIZE, 36,
-												GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(message, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE).addGap(18)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addComponent(submit, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-						.addGap(49)));
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(label)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(message, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)))
+							.addGap(53))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(57)
+							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+							.addComponent(submit, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
+							.addGap(42))))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(user_label, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(phone_label, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(txtPhone, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(checkBoxFavorite)
+					.addGap(11)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtBirthday, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addComponent(birthday_label, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(message, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label))
+					.addGap(18)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+						.addComponent(submit, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addGap(49))
+		);
 		panel.setLayout(gl_panel);
 		setTitle("Please SignUp Here !");
 		setSize(387, 363);

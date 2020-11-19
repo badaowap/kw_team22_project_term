@@ -94,7 +94,7 @@ public class Out extends JDialog {
 					lblNewLabel_1 = new JLabel(" ");
 				}
 		
-				JLabel lblNewLabel = new JLabel("종류하시겠습니까?");
+				JLabel lblNewLabel = new JLabel("종료하시겠습니까?");
 				lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 17));
 		{
 			cancelButton = new JButton("Cancel");

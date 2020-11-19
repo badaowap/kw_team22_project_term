@@ -24,11 +24,13 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
+import kwteam22.model.BasketPK;
 import kwteam22.model.Bill;
 import kwteam22.model.Customer;
 import kwteam22.model.Menu;
 import kwteam22.view.template.Conn;
 import kwteam22.view.template.ConnToDB;
+import java.awt.Label;
 
 public class CustomerView extends JDialog {
 
@@ -79,52 +81,69 @@ public class CustomerView extends JDialog {
 			btnOk.setActionCommand("OK");
 			getRootPane().setDefaultButton(btnOk);
 		}
+		
+		JLabel label_1 = new JLabel("(1996-11-11)");
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
-		gl_contentPanel.setHorizontalGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPanel.createSequentialGroup().addGroup(gl_contentPanel
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPanel.createSequentialGroup().addGroup(gl_contentPanel
-								.createParallelGroup(Alignment.LEADING)
-								.addGroup(
-										gl_contentPanel.createSequentialGroup().addContainerGap().addComponent(lblName))
-								.addComponent(lblBirthday)
-								.addGroup(gl_contentPanel
-										.createSequentialGroup().addContainerGap().addComponent(lblNewLabel)))
-								.addGap(24)
-								.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(txtBirthday, GroupLayout.PREFERRED_SIZE, 305,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 302,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(txtPhone, GroupLayout.PREFERRED_SIZE, 298,
-												GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPanel.createSequentialGroup().addGap(109).addComponent(label)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(labelTotal, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap(17, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING,
-						gl_contentPanel.createSequentialGroup().addContainerGap(247, Short.MAX_VALUE)
-								.addComponent(btnCancel).addPreferredGap(ComponentPlacement.RELATED).addComponent(btnOk)
-								.addGap(39)));
-		gl_contentPanel.setVerticalGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPanel
-				.createSequentialGroup()
-				.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtPhone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
+		gl_contentPanel.setHorizontalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(109)
+							.addComponent(label)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(labelTotal, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 2, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl_contentPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnCancel)
+							.addGap(18)
+							.addComponent(btnOk)
+							.addGap(99)))
+					.addGap(97))
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblName))
+						.addComponent(lblBirthday)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel)))
+					.addGap(24)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(label_1)
+						.addComponent(txtBirthday, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtPhone, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(242, Short.MAX_VALUE))
+		);
+		gl_contentPanel.setVerticalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtPhone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel))
-				.addGap(18)
-				.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE).addComponent(lblName).addComponent(
-						txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGap(18)
-				.addGroup(gl_contentPanel
-						.createParallelGroup(Alignment.BASELINE).addComponent(lblBirthday).addComponent(txtBirthday,
-								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGap(26)
-				.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE).addComponent(label)
+					.addGap(18)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblName)
+						.addComponent(txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblBirthday)
+						.addComponent(txtBirthday, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(6)
+					.addComponent(label_1)
+					.addGap(24)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label)
 						.addComponent(labelTotal))
-				.addGap(18).addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE).addComponent(btnCancel)
-						.addComponent(btnOk))
-				.addGap(33)));
+					.addGap(18)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnOk)
+						.addComponent(btnCancel))
+					.addGap(10))
+		);
 		contentPanel.setLayout(gl_contentPanel);
 		addEvent();
 
@@ -190,13 +209,13 @@ public class CustomerView extends JDialog {
 
 			if (customers.contains(customer)) {
 				if (txtBirthday.getText().trim().equalsIgnoreCase("") == false) {
-					date = new SimpleDateFormat("yyyy/MM/dd").parse(txtBirthday.getText());
+					date = new SimpleDateFormat("yyyy-MM-dd").parse(txtBirthday.getText());
 					connCus.modify(customer, customer.getPhone(), date, 2);
 				}
 			} else {
 				if (txtBirthday.getText().trim().equalsIgnoreCase("") == false) {
 					customer.setLevel(2);
-					date = new SimpleDateFormat("yyyy/MM/dd").parse(txtBirthday.getText());
+					date = new SimpleDateFormat("yyyy-MM-dd").parse(txtBirthday.getText());
 					customer.setBirthday(date);
 					connCus.add(customer);
 
@@ -209,6 +228,15 @@ public class CustomerView extends JDialog {
 		} else {
 			customer = cus;
 		}
+		
+		/*
+		 * Conn<kwteam22.model.Basket> connBasket = new
+		 * ConnToDB<kwteam22.model.Basket>(); kwteam22.model.Basket basket = new
+		 * kwteam22.model.Basket(); BasketPK basPK = new BasketPK();
+		 * basPK.setCustomerPhone(customer.getPhone()); for(Menu m :
+		 * customer.getMenus()) { basPK.setMenuId(m.getId()); basket.setId(basPK); }
+		 * connBasket.add(basket);
+		 */
 
 		Bill bill = new Bill(customer, Integer.parseInt(labelTotal.getText()));
 		connBill.add(bill);
@@ -221,7 +249,7 @@ public class CustomerView extends JDialog {
 	}
 
 	private void addControl() {
-		setBounds(100, 100, 422, 241);
+		setBounds(100, 100, 431, 260);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

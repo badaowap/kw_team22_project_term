@@ -52,7 +52,7 @@ public class Basket extends JDialog {
 		for (Menu m : mapBasket.keySet()) {
 			total += (m.getPrice() * mapBasket.get(m));
 		}
-		if (total >= 70000 && MenuView.loginCus.getLevel() != 0) { // 쿠폰을 적용하면 3000원 빼준다.
+		if (total >= 70000 && MenuView.loginCus != null ) { // 쿠폰을 적용하면 3000원 빼준다.
 			total = total - 3000;
 			lblXacNhan.setText("있음");
 		} else {

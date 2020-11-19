@@ -228,7 +228,7 @@ public class MenuView extends JFrame {
 
 	protected void btnEventLogout(ActionEvent e) {
 		if (loginAcc == true) {
-			MenuView menuView = new MenuView(false, loginCus, null);
+			MenuView menuView = new MenuView(false, null, null);
 			menuView.setVisible(true);
 			menuView.setLocationRelativeTo(null);
 			this.setVisible(false);
@@ -368,7 +368,7 @@ public class MenuView extends JFrame {
 		mnLogin.add(btnLoginAsAdmin);
 		menuBar.add(btnSignUp);
 
-		btnLogout = new JButton("로그웃");
+		btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnLogout.setBackground(Color.LIGHT_GRAY);
 		if (loginAcc == false) {
@@ -376,7 +376,7 @@ public class MenuView extends JFrame {
 		}
 		menuBar.add(btnLogout);
 
-		btnExit = new JButton("종류");
+		btnExit = new JButton("종료");
 		btnExit.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnExit.setForeground(Color.BLACK);
 		btnExit.setBackground(Color.ORANGE);
