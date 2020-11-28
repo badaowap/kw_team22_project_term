@@ -1,6 +1,6 @@
 # kw_team22_project_term
 
-데이터베이스 : maridb
+데이터베이스 : mariadb
 실습환경 : linux
 사용언어 : Java Swing
 
