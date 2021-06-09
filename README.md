@@ -1,4 +1,4 @@
-# kw_team22_project_term
+# Vending Machine
 
 데이터베이스 : mariadb
 실습환경 : linux
